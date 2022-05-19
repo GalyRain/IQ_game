@@ -29,7 +29,7 @@ namespace Game.MoveAndRotateModel
         {
             if (_isClick && Input.GetMouseButtonDown(0))
             {
-                model.transform.RotateAround(transformTarget.position, Vector3.back, 180);
+                model.transform.RotateAround(transformTarget.position, Vector3.down, 180);
                 _isClick = false;
             }
         }

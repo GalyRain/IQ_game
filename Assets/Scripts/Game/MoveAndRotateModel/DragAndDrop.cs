@@ -5,33 +5,26 @@ namespace Game.MoveAndRotateModel
     [RequireComponent(typeof(PolygonCollider2D))]
     public class DragAndDrop : MonoBehaviour
     {
-        private bool _dragging = false;
-        private Camera _camera;
-        private PolygonCollider2D _polygonCollider2D;
+        private UnityEngine.Camera _camera;
+        private PolygonCollider2D _collider;
+        private Vector3 _offset;
 
         private void Start()
         {
-            _polygonCollider2D = GetComponent<PolygonCollider2D>();
-            _camera = Camera.main;
+            _collider = GetComponent<PolygonCollider2D>();
+            _camera = UnityEngine.Camera.main;
         }
-
-        private void Update()
-        {
-            if (_dragging)
-            {
-                Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-                transform.Translate(mousePosition);
-            }
-        }
-
+        
         private void OnMouseDown()
         {
-            _dragging = true;
+            _offset = transform.position -
+                      _camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
         }
 
-        private void OnMouseUp()
+        private void OnMouseDrag()
         {
-            _dragging = false;
+            Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
+            transform.position = _camera.ScreenToWorldPoint(newPosition) + _offset;
         }
     }
 }
