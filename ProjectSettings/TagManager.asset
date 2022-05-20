@@ -4,10 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BlockOne
-  - BlockTwo
-  - BlockThree
-  - BlockFour
+  - Puzzle
+  - Model
+  - Target
   layers:
   - Default
   - TransparentFX
@@ -44,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Piece
+    uniqueID: 1068052745
     locked: 0
