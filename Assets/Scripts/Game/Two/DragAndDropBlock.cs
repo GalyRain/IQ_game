@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class DragAndDropBlock : MonoBehaviour
 {
@@ -51,10 +47,9 @@ public class DragAndDropBlock : MonoBehaviour
             if (hit.transform != null && hit.transform.CompareTag("Model"))
             {
                 selectBlock = hit.transform.gameObject;
-                // _target = selectBlock.transform.Find("Target");
-                _offset = selectBlock.transform.position - _camera.ScreenToWorldPoint(
-                    new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-                selectBlock.transform.RotateAround(_offset, Vector3.forward, 45);
+                this._target = selectBlock.GetComponentInChildren<Transform>();
+                Debug.Log(_target.position);
+                selectBlock.transform.RotateAround(_target.position, Vector3.forward, 45);
             }
         }
         NotActivated(1);
@@ -67,10 +62,8 @@ public class DragAndDropBlock : MonoBehaviour
             if (hit.transform != null && hit.transform.CompareTag("Model"))
             {
                 selectBlock = hit.transform.gameObject;
-                // _target = selectBlock.transform.Find("Target");
-                _offset = selectBlock.transform.position - _camera.ScreenToWorldPoint(
-                    new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-                selectBlock.transform.RotateAround(_offset, Vector3.down, 180);
+                this._target = selectBlock.GetComponentInChildren<Transform>();
+                selectBlock.transform.RotateAround(_target.position, Vector3.down, 180);
             }
         }
         NotActivated(2);
