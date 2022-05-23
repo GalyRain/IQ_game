@@ -17,39 +17,39 @@ namespace Game.GameAndUI
     
         private bool CheckPosition()
         {
-            if (Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) < 2.55f
-                && Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) > 2.45f)
+            if (Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) < 5.10f
+                && Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) > 4.90f)
             {
                 _isOneTwo = true;
                 // Debug.Log(isOneTwo);
             }
         
-            if (Vector3.Distance(blockOne.transform.position, blockThree.transform.position) < 2.58f
-                && Vector3.Distance(blockOne.transform.position, blockThree.transform.position) > 2.48f)
+            if (Vector3.Distance(blockOne.transform.position, blockThree.transform.position) < 5.15f
+                && Vector3.Distance(blockOne.transform.position, blockThree.transform.position) > 4.95f)
             {
                 _isOneThree = true;
                 // Debug.Log(isOneThree);
             }
-            if (Vector3.Distance(blockOne.transform.position, blockFour.transform.position) < 0.85f
-                && Vector3.Distance(blockOne.transform.position, blockFour.transform.position) > 0.75f)
+            if (Vector3.Distance(blockOne.transform.position, blockFour.transform.position) < 1.70f
+                && Vector3.Distance(blockOne.transform.position, blockFour.transform.position) > 1.50f)
             {
                 _isOneFour = true;
                 // Debug.Log(isOneFour);
             }
-            if (Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) < 3.58f
-                && Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) > 3.48f)
+            if (Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) < 7.25f
+                && Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) > 7.05f)
             {
                 _isTwoThree = true;
                 // Debug.Log(isTwoThree);
             }
-            if (Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) < 3.30f
-                && Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) > 3.20f)
+            if (Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) < 6.65f
+                && Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) > 6.45f)
             {
                 _isTwoFour = true;
                 // Debug.Log(isThreeFour);
             }
-            if (Vector3.Distance(blockThree.transform.position, blockFour.transform.position) < 2.45f
-                && Vector3.Distance(blockThree.transform.position, blockFour.transform.position) > 2.35f)
+            if (Vector3.Distance(blockThree.transform.position, blockFour.transform.position) < 4.90f
+                && Vector3.Distance(blockThree.transform.position, blockFour.transform.position) > 4.70f)
             {
                 _isThreeFour = true;
                 // Debug.Log(isThreeFour);
@@ -64,12 +64,12 @@ namespace Game.GameAndUI
 
         public void FinishButton()
         {
-            // Debug.Log(Vector3.Distance(blockOne.transform.position, blockTwo.transform.position));
-            // Debug.Log(Vector3.Distance(blockOne.transform.position, blockThree.transform.position));
-            // Debug.Log(Vector3.Distance(blockOne.transform.position, blockFour.transform.position));
-            // Debug.Log(Vector3.Distance(blockTwo.transform.position, blockThree.transform.position));
-            // Debug.Log(Vector3.Distance(blockTwo.transform.position, blockFour.transform.position));
-            // Debug.Log(Vector3.Distance(blockThree.transform.position, blockFour.transform.position));
+            Debug.Log(Vector3.Distance(blockOne.transform.position, blockTwo.transform.position));
+            Debug.Log(Vector3.Distance(blockOne.transform.position, blockThree.transform.position));
+            Debug.Log(Vector3.Distance(blockOne.transform.position, blockFour.transform.position));
+            Debug.Log(Vector3.Distance(blockTwo.transform.position, blockThree.transform.position));
+            Debug.Log(Vector3.Distance(blockTwo.transform.position, blockFour.transform.position));
+            Debug.Log(Vector3.Distance(blockThree.transform.position, blockFour.transform.position));
             Debug.Log(CheckPosition());
             if (CheckPosition())
             {

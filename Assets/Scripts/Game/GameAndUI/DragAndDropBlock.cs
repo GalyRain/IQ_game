@@ -1,13 +1,19 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Game.GameAndUI
 {
     public class DragAndDropBlock : MonoBehaviour
     {
-        [SerializeField] private GameObject selectBlock; 
-        private Transform _target;
+        [SerializeField] private GameObject selectBlock;
+        
         private UnityEngine.Camera _camera;
         private Vector3 _offset;
+        private bool _dragging = false;
+        
+        private float _doubleClickTime = 0.25f;
+        private float _lastClickTime = 0.0f;
 
         private void Start()
         {
@@ -25,15 +31,18 @@ namespace Game.GameAndUI
             RotateZ(hit);
 #endif
 #if UNITY_ANDROID
-            DragAndDropAndroid(hit);
+             DragAndDropAndroid(hit);
+             // RotateZAndroid(hit);
+             RotateYAndroid(hit);
 #endif
         }
-
+// PC ------------------------------------------------------------------------------------------------------------------
+// PC ------------------------------------------------------------------------------------------------------------------
         private void DragAndDrop(RaycastHit2D hit)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform != null && hit.transform.CompareTag("Model"))
+                if (hit.collider != null && hit.collider.CompareTag("Model"))
                 {
                     selectBlock = hit.transform.gameObject;
                     _offset = selectBlock.transform.position - _camera.ScreenToWorldPoint(
@@ -47,43 +56,15 @@ namespace Game.GameAndUI
             }
             NotActivated(0);
         }
-        
-        private void DragAndDropAndroid(RaycastHit2D hit)
-        {
-            if (Input.touchCount > 0)
-            {
-                if (hit.transform != null && hit.transform.CompareTag("Model"))
-                {
-                    selectBlock = hit.transform.gameObject;
-                    _offset = selectBlock.transform.position - _camera.ScreenToWorldPoint(
-                        new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-                }
-            }
-            if (selectBlock != null)
-            {
-                Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
-                selectBlock.transform.position = _camera.ScreenToWorldPoint(newPosition) + _offset;
-            }
 
-            if (Input.touchCount < 0)
-            {
-                if (selectBlock != null)
-                {
-                    selectBlock = null;
-                }
-            }
-        }
-    
         private void RotateZ(RaycastHit2D hit)
         {
             if (Input.GetMouseButtonDown(1))
             {
-                if (hit.transform != null && hit.transform.CompareTag("Model"))
+                if (hit.collider != null && hit.collider.CompareTag("Model"))
                 {
                     selectBlock = hit.transform.gameObject;
-                    this._target = selectBlock.GetComponentInChildren<Transform>();
-                    Debug.Log(_target.position);
-                    selectBlock.transform.RotateAround(_target.position, Vector3.forward, 45);
+                    hit.collider.GetComponent<Rotation>().RotateZ();
                 }
             }
             NotActivated(1);
@@ -91,18 +72,22 @@ namespace Game.GameAndUI
 
         private void RotateY(RaycastHit2D hit)
         {
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform != null && hit.transform.CompareTag("Model"))
+                float timeFromLastClick = Time.time - _lastClickTime;
+                _lastClickTime = Time.time;
+                if (timeFromLastClick < _doubleClickTime)
                 {
-                    selectBlock = hit.transform.gameObject;
-                    this._target = selectBlock.GetComponentInChildren<Transform>();
-                    selectBlock.transform.RotateAround(_target.position, Vector3.down, 180);
+                    if (hit.collider != null && hit.collider.CompareTag("Model"))
+                    {
+                        selectBlock = hit.transform.gameObject;
+                        hit.collider.GetComponent<Rotation>().RotateY();
+                    }
                 }
             }
-            NotActivated(2);
+            NotActivated(1);
         }
-
+        
         private void NotActivated(int mouseButton)
         {
             if (Input.GetMouseButtonUp(mouseButton))
@@ -112,7 +97,97 @@ namespace Game.GameAndUI
                     selectBlock = null;
                 }
             }
+        } 
+        
+// Android -------------------------------------------------------------------------------------------------------------
+// Android -------------------------------------------------------------------------------------------------------------
+
+        private void DragAndDropAndroid(RaycastHit2D hit)
+        {
+            Touch touch = Input.touches[0];
+ 
+            if (Input.touchCount != 1)
+            {
+                _dragging = false;
+                return;
+            }
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (hit.collider != null && hit.collider.CompareTag("Model"))
+                {
+                    selectBlock = hit.transform.gameObject;
+                    _offset = selectBlock.transform.position - _camera.ScreenToWorldPoint(
+                        new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+                    _dragging = true;
+                }
+            }
+ 
+            if (_dragging && touch.phase == TouchPhase.Moved)
+            {
+                Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
+                selectBlock.transform.position = _camera.ScreenToWorldPoint(newPosition) + _offset;
+            }
+ 
+            if (_dragging && touch.phase is TouchPhase.Ended or TouchPhase.Canceled)
+            {
+                _dragging = false;
+                if (selectBlock != null)
+                {
+                    selectBlock = null;
+                }
+            }
         }
         
+        private void RotateZAndroid(RaycastHit2D hit)
+        {
+            Touch touchA = Input.GetTouch(0);
+            Touch touchB = Input.GetTouch(1);
+            Vector2 touchADirection = touchA.position - touchA.deltaPosition;
+            Vector2 touchBDirection = touchB.position - touchB.deltaPosition;
+ 
+            if (hit.collider != null && hit.collider.CompareTag("Model"))
+            {
+                selectBlock = hit.transform.gameObject;
+                float angle = Vector3.SignedAngle(touchA.position - touchB.position,
+                        touchADirection - touchBDirection, - _camera.transform.forward);
+                selectBlock.transform.RotateAround(_camera.transform.position, Vector3.forward, angle);
+            }
+
+            if (touchA.phase is TouchPhase.Ended or TouchPhase.Canceled)
+            {
+                if (selectBlock != null)
+                {
+                    selectBlock = null;
+                }
+            }
+        }
+        
+        private void RotateYAndroid(RaycastHit2D hit)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                float timeFromLastClick = Time.time - _lastClickTime;
+                _lastClickTime = Time.time;
+
+                if (touch.tapCount == 1 && timeFromLastClick < _doubleClickTime)
+                {
+                    if (hit.transform != null && hit.collider.CompareTag("Model"))
+                    {
+                        selectBlock = hit.transform.gameObject;
+                        hit.collider.GetComponent<Rotation>().RotateY();
+                    }
+                }
+            }
+
+            if (touch.phase is TouchPhase.Ended or TouchPhase.Canceled)
+            {
+                if (selectBlock != null)
+                {
+                    selectBlock = null;
+                }
+            }
+        }
     }
 }

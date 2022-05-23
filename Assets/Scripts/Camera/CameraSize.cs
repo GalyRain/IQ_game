@@ -4,8 +4,8 @@ namespace Camera
 {
     public class CameraSize : MonoBehaviour
     {
-        private const float TargetSizeX = 1280.0f;
-        private const float TargetSizeY = 720.0f;
+        private const float TargetSizeX = 1920.0f;
+        private const float TargetSizeY = 1080.0f;
         private const float HalfSize = 200.0f; // половина высоты в пикселях
 
         private void Awake()
