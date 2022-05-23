@@ -15,7 +15,7 @@ namespace Game.GameAndUI
         private float _doubleClickTime = 0.25f;
         private float _lastClickTime = 0.0f;
 
-        private void Start()
+        private void Awake()
         {
             _camera = UnityEngine.Camera.main;
         }
@@ -31,9 +31,9 @@ namespace Game.GameAndUI
             RotateZ(hit);
 #endif
 #if UNITY_ANDROID
-             DragAndDropAndroid(hit);
-             // RotateZAndroid(hit);
-             RotateYAndroid(hit);
+            DragAndDropAndroid(hit);
+            RotateZAndroid(hit);
+            RotateYAndroid(hit);
 #endif
         }
 // PC ------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ namespace Game.GameAndUI
         {
             if (Input.GetMouseButtonUp(mouseButton))
             {
-                if (selectBlock != null)
+                if (!(selectBlock == null))
                 {
                     selectBlock = null;
                 }
@@ -101,91 +101,74 @@ namespace Game.GameAndUI
         
 // Android -------------------------------------------------------------------------------------------------------------
 // Android -------------------------------------------------------------------------------------------------------------
-
         private void DragAndDropAndroid(RaycastHit2D hit)
         {
-            Touch touch = Input.touches[0];
- 
-            if (Input.touchCount != 1)
+            if (Input.touchCount == 1)
             {
-                _dragging = false;
-                return;
-            }
+                Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Began)
-            {
-                if (hit.collider != null && hit.collider.CompareTag("Model"))
+                if (touch.phase == TouchPhase.Began)
                 {
-                    selectBlock = hit.transform.gameObject;
-                    _offset = selectBlock.transform.position - _camera.ScreenToWorldPoint(
-                        new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-                    _dragging = true;
+                    if (hit.collider != null && hit.collider.CompareTag("Model"))
+                    {
+                        selectBlock = hit.transform.gameObject;
+                        _offset = selectBlock.transform.position - _camera.ScreenToWorldPoint(
+                            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+
+                        _dragging = true;
+                    }
                 }
-            }
- 
-            if (_dragging && touch.phase == TouchPhase.Moved)
-            {
-                Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
-                selectBlock.transform.position = _camera.ScreenToWorldPoint(newPosition) + _offset;
-            }
- 
-            if (_dragging && touch.phase is TouchPhase.Ended or TouchPhase.Canceled)
-            {
-                _dragging = false;
-                if (selectBlock != null)
+
+                if (_dragging && touch.phase == TouchPhase.Moved)
                 {
-                    selectBlock = null;
+                    Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
+                    selectBlock.transform.position = _camera.ScreenToWorldPoint(newPosition) + _offset;
+                }
+
+                if (_dragging && touch.phase is TouchPhase.Ended or TouchPhase.Canceled)
+                {
+                    _dragging = false;
+                    if (!(selectBlock == null))
+                    {
+                        selectBlock = null;
+                    }
                 }
             }
         }
         
         private void RotateZAndroid(RaycastHit2D hit)
         {
-            Touch touchA = Input.GetTouch(0);
-            Touch touchB = Input.GetTouch(1);
-            Vector2 touchADirection = touchA.position - touchA.deltaPosition;
-            Vector2 touchBDirection = touchB.position - touchB.deltaPosition;
+            if (Input.touchCount == 2)
+            {
+                Touch touchA = Input.GetTouch(0);
+                Touch touchB = Input.GetTouch(1);
+                Vector2 touchADirection = touchA.position - touchA.deltaPosition;
+                Vector2 touchBDirection = touchB.position - touchB.deltaPosition;
  
-            if (hit.collider != null && hit.collider.CompareTag("Model"))
-            {
-                selectBlock = hit.transform.gameObject;
-                float angle = Vector3.SignedAngle(touchA.position - touchB.position,
-                        touchADirection - touchBDirection, - _camera.transform.forward);
-                selectBlock.transform.RotateAround(_camera.transform.position, Vector3.forward, angle);
-            }
-
-            if (touchA.phase is TouchPhase.Ended or TouchPhase.Canceled)
-            {
-                if (selectBlock != null)
+                if (hit.collider != null && hit.collider.CompareTag("Model"))
                 {
-                    selectBlock = null;
+                    selectBlock = hit.transform.gameObject;
+                    float angle = Vector3.SignedAngle(touchA.position - touchB.position,
+                        touchADirection - touchBDirection, - _camera.transform.forward);
+                    selectBlock.transform.RotateAround(_camera.transform.position, Vector3.forward, angle);
                 }
             }
         }
         
         private void RotateYAndroid(RaycastHit2D hit)
         {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+            if (Input.touchCount == 1)
             {
                 float timeFromLastClick = Time.time - _lastClickTime;
                 _lastClickTime = Time.time;
 
-                if (touch.tapCount == 1 && timeFromLastClick < _doubleClickTime)
+                if (timeFromLastClick < _doubleClickTime)
                 {
-                    if (hit.transform != null && hit.collider.CompareTag("Model"))
+                    if (hit.collider != null && hit.collider.CompareTag("Model"))
                     {
                         selectBlock = hit.transform.gameObject;
-                        hit.collider.GetComponent<Rotation>().RotateY();
+                        hit.transform.GetComponent<Rotation>().RotateY();
                     }
-                }
-            }
-
-            if (touch.phase is TouchPhase.Ended or TouchPhase.Canceled)
-            {
-                if (selectBlock != null)
-                {
-                    selectBlock = null;
                 }
             }
         }
