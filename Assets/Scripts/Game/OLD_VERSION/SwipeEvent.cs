@@ -18,7 +18,5 @@ public class SwipeEvent : MonoBehaviour, IBeginDragHandler, IDragHandler
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-    }
+    public void OnDrag(PointerEventData eventData) {}
 }

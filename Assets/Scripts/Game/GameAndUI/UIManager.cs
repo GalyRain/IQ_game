@@ -17,42 +17,42 @@ namespace Game.GameAndUI
     
         private bool CheckPosition()
         {
-            if (Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) < 10.10f
-                && Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) > 9.90f)
+            if (Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) < 10.20f
+                && Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) > 9.80f)
             {
                 _isOneTwo = true;
-                // Debug.Log(isOneTwo);
+                Debug.Log(_isOneTwo);
             }
         
-            if (Vector3.Distance(blockOne.transform.position, blockThree.transform.position) < 10.20f
-                && Vector3.Distance(blockOne.transform.position, blockThree.transform.position) > 10.00f)
+            if (Vector3.Distance(blockOne.transform.position, blockThree.transform.position) < 10.30f
+                && Vector3.Distance(blockOne.transform.position, blockThree.transform.position) > 9.90f)
             {
                 _isOneThree = true;
-                // Debug.Log(isOneThree);
+                Debug.Log(_isOneThree);
             }
-            if (Vector3.Distance(blockOne.transform.position, blockFour.transform.position) < 3.25f
-                && Vector3.Distance(blockOne.transform.position, blockFour.transform.position) > 3.05f)
+            if (Vector3.Distance(blockOne.transform.position, blockFour.transform.position) < 3.35f
+                && Vector3.Distance(blockOne.transform.position, blockFour.transform.position) > 2.95f)
             {
                 _isOneFour = true;
-                // Debug.Log(isOneFour);
+                Debug.Log(_isOneFour);
             }
-            if (Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) < 14.40f
-                && Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) > 14.20f)
+            if (Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) < 14.50f
+                && Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) > 14.10f)
             {
                 _isTwoThree = true;
-                // Debug.Log(isTwoThree);
+                Debug.Log(_isTwoThree);
             }
-            if (Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) < 13.15f
+            if (Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) < 13.25f
                 && Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) > 12.95f)
             {
                 _isTwoFour = true;
-                // Debug.Log(isThreeFour);
+                Debug.Log(_isTwoFour);
             }
-            if (Vector3.Distance(blockThree.transform.position, blockFour.transform.position) < 9.70f
-                && Vector3.Distance(blockThree.transform.position, blockFour.transform.position) > 9.50f)
+            if (Vector3.Distance(blockThree.transform.position, blockFour.transform.position) < 9.80f
+                && Vector3.Distance(blockThree.transform.position, blockFour.transform.position) > 9.40f)
             {
                 _isThreeFour = true;
-                // Debug.Log(isThreeFour);
+                Debug.Log(_isThreeFour);
             }
 
             if (_isOneTwo && _isOneThree && _isOneFour && _isTwoThree && _isTwoFour && _isThreeFour)
