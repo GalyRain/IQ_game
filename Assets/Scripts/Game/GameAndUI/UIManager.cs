@@ -112,6 +112,11 @@ namespace Game.GameAndUI
             blockTwo.transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
             blockThree.transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
             blockFour.transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
+
+            blockOne.transform.rotation = Quaternion.Euler(0, 0, 0);
+            blockTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
+            blockThree.transform.rotation = Quaternion.Euler(0, 0, 0);
+            blockFour.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         private void CheckFalse()

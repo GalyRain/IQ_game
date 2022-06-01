@@ -269,7 +269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectBlock: {fileID: 0}
-  target: {fileID: 0}
 --- !u!1 &608138131
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d6264c18390442da11041dfe10bab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  center: {fileID: 0}
   target: {fileID: 784004262}
 --- !u!1 &895088109
 GameObject:
@@ -773,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d6264c18390442da11041dfe10bab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  center: {fileID: 0}
   target: {fileID: 1074374758}
 --- !u!1 &923616695
 GameObject:
@@ -1662,7 +1663,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1515253890}
   - component: {fileID: 1515253886}
-  - component: {fileID: 1515253889}
   m_Layer: 0
   m_Name: Target
   m_TagString: Target
@@ -1722,14 +1722,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!222 &1515253889
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515253884}
-  m_CullTransparentMesh: 1
 --- !u!4 &1515253890
 Transform:
   m_ObjectHideFlags: 0
@@ -1886,6 +1878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d6264c18390442da11041dfe10bab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  center: {fileID: 0}
   target: {fileID: 1743326093}
 --- !u!1 &1724579408
 GameObject:
@@ -2062,7 +2055,6 @@ GameObject:
   - component: {fileID: 1797364829}
   - component: {fileID: 1797364826}
   - component: {fileID: 1797364830}
-  - component: {fileID: 1797364832}
   m_Layer: 0
   m_Name: BlockOne
   m_TagString: Model
@@ -2173,6 +2165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d6264c18390442da11041dfe10bab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  center: {fileID: 0}
   target: {fileID: 1515253890}
 --- !u!4 &1797364831
 Transform:
@@ -2190,14 +2183,6 @@ Transform:
   m_Father: {fileID: 126454538}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!222 &1797364832
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1797364820}
-  m_CullTransparentMesh: 1
 --- !u!1 &2055226144
 GameObject:
   m_ObjectHideFlags: 0

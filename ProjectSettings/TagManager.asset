@@ -7,6 +7,8 @@ TagManager:
   - Puzzle
   - Model
   - Target
+  - Block
+  - Background
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-
 namespace Game.GameAndUI
 {
     public class DragAndDropBlock : MonoBehaviour
