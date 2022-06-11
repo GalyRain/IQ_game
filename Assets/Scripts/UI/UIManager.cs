@@ -4,6 +4,7 @@ namespace UI
 {
     public class UIManager : MonoBehaviour
     {
+        [SerializeField] private GameObject helperBloks;
         [SerializeField] private GameObject blockOne;
         [SerializeField] private GameObject blockTwo;
         [SerializeField] private GameObject blockThree;
@@ -11,11 +12,14 @@ namespace UI
         [SerializeField] private GameObject startPanel;
         [SerializeField] private GameObject gamePanel;
         [SerializeField] private GameObject rulesPanel;
+        [SerializeField] private GameObject rulesText;
         [SerializeField] private GameObject gameBlocks;
         [SerializeField] private GameObject wrongText;
         [SerializeField] private GameObject wonText;
+
         private bool _isOneTwo = false, _isOneThree = false, _isOneFour = false, _isTwoThree = false, 
             _isTwoFour = false, _isThreeFour, _isRight = false;
+        private bool _isRullestVisible = false;
     
         private bool CheckPosition()
         {
@@ -64,7 +68,7 @@ namespace UI
             return _isRight;
         }
 
-        public void FinishButton()
+        public void CheckButton()
         {
             Debug.Log(Vector3.Distance(blockOne.transform.position, blockTwo.transform.position));
             Debug.Log(Vector3.Distance(blockOne.transform.position, blockThree.transform.position));
@@ -75,33 +79,38 @@ namespace UI
             Debug.Log(CheckPosition());
             if (CheckPosition())
             {
+                wrongText.SetActive(false);
                 wonText.SetActive(true);
             }
             else
             {
+                wonText.SetActive(false);
                 wrongText.SetActive(true);
             }
         }
     
         public void StartButton()
         {
-            gamePanel.SetActive(true);
             startPanel.SetActive(false);
             rulesPanel.SetActive(false);
-            gameBlocks.SetActive(true);
             wrongText.SetActive(false);
             wonText.SetActive(false);
+            gamePanel.SetActive(true);
+            gameBlocks.SetActive(true);
             RandomPosition();
             CheckFalse();
         }
         
         public void BackButton()
         {
-            startPanel.SetActive(true);
             gamePanel.SetActive(false);
             rulesPanel.SetActive(false);
             gameBlocks.SetActive(false);
             wrongText.SetActive(false);
+            startPanel.SetActive(true);
+            helperBloks.SetActive(false);
+            rulesText.SetActive(false);
+            _isRullestVisible = false;
         }
         
         public void RulesButton()
@@ -110,6 +119,26 @@ namespace UI
             rulesPanel.SetActive(true);
         }
         
+        public void GameRulesButton()
+        {
+            if (!_isRullestVisible) 
+            {
+                rulesText.SetActive(true);
+                gameBlocks.SetActive(false);
+            } 
+            if (_isRullestVisible) 
+            {
+                rulesText.SetActive(false);
+                gameBlocks.SetActive(true);
+            } 
+            _isRullestVisible = !_isRullestVisible;    
+        }
+
+        public void GameHelpButton()
+        {
+            helperBloks.SetActive(true); 
+        }
+
         public void ExitButton()
         {
             Application.Quit();
@@ -117,15 +146,14 @@ namespace UI
     
         private void RandomPosition()
         {
-            blockOne.transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
-            blockTwo.transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
-            blockThree.transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
-            blockFour.transform.position = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
-
             blockOne.transform.rotation = Quaternion.Euler(0, 0, 0);
             blockTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
             blockThree.transform.rotation = Quaternion.Euler(0, 0, 0);
             blockFour.transform.rotation = Quaternion.Euler(0, 0, 0);
+            blockOne.transform.position = new Vector3(Random.Range(-6f, 0f), Random.Range(0f, 8f), 0f);
+            blockTwo.transform.position = new Vector3(Random.Range(-6f, 0f), Random.Range(-8f, 0f), 0f);
+            blockThree.transform.position = new Vector3(Random.Range(0f, 6f), Random.Range(0f, 8f), 0f);
+            blockFour.transform.position = new Vector3(Random.Range(0, 6f), Random.Range(-8f, 0f), 0f);
         }
 
         private void CheckFalse()
