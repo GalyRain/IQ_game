@@ -36,19 +36,18 @@ namespace Game
         private void OnMouseDrag()
         {
             mousePositionB = _camera.ScreenToWorldPoint(Input.mousePosition);
-            // var position = block.transform.position;
             var position = transform.position;
 
-            _angle = Vector3.SignedAngle(mousePositionA - position,
-                mousePositionB - position, - _camera.transform.forward);
-            
+            _angle = Vector2.SignedAngle(mousePositionA - position,
+                mousePositionB - position);
+
             if (_blockRotation.y == 180)
             {
-                block.transform.rotation = Quaternion.Euler(0, 180,  _angle * 8 +_blockRotation.z);
+                block.transform.rotation = Quaternion.Euler(0, 180,  - _angle +_blockRotation.z);
             }
             else 
             {
-                block.transform.rotation = Quaternion.Euler(0, 0,  - _angle * 8 + _blockRotation.z);
+                block.transform.rotation = Quaternion.Euler(0, 0,  _angle  + _blockRotation.z);
             }
         }
     }

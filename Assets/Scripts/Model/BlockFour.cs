@@ -22,7 +22,6 @@ namespace Model
 
             GetComponent<MeshFilter>().mesh = mesh;
             GetComponent<MeshRenderer>().material = material;
-            GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
 }
