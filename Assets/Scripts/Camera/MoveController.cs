@@ -8,14 +8,16 @@ namespace Camera
     public class MoveController : MonoBehaviour
     {
         [SerializeField] private GameObject selectBlock;
+
+        private Collider2D _collider;
+        private Vector3 _hitPoint;
         
         private UnityEngine.Camera _camera;
-        private Collider2D _collider;
         private Rigidbody2D _blockRigidbody;
         private SpringJoint2D _springJoint;
         private Vector2 _offset;
-        private Vector3 _hitPoint;
-        private float _dragSpeed = 10f;
+        
+        private readonly float _dragSpeed = 10f;
         private int _level = 1;
 
         private void Awake()
@@ -32,7 +34,7 @@ namespace Camera
             {
                 if (hit.collider != null && hit.collider.CompareTag("Block"))
                 {
-                    // if (_springJoint != null) 
+                    // if (_springJoint != null) // поворот джоинами
                     // {
                     //     Destroy(_springJoint);
                     //     _springJoint = null;
@@ -45,8 +47,8 @@ namespace Camera
                     }
 
                     selectBlock = hit.transform.gameObject;
-                    _collider = hit.collider;
-                    _hitPoint = hit.point;
+                    // _collider = hit.collider; // поворот джоинами
+                    // _hitPoint = hit.point;
 
                     selectBlock.GetComponent<BlockController>().SetActivated();
                     
@@ -61,7 +63,7 @@ namespace Camera
                         new Vector3(Input.mousePosition.x, Input.mousePosition.y));
                    
                     
-                    // Vector3 localHit = selectBlock.transform.InverseTransformPoint(hit.point);
+                    // Vector3 localHit = selectBlock.transform.InverseTransformPoint(hit.point); // поворот джоинами
                     // _springJoint = selectBlock.gameObject.AddComponent<SpringJoint2D>();
                     // _springJoint.connectedBody = null;
                     // _springJoint.enabled = true;
@@ -88,7 +90,7 @@ namespace Camera
                     _blockRigidbody.mass = 100f;
                 }
                 _blockRigidbody = null;
-                // Destroy(_springJoint);
+                // Destroy(_springJoint); // поворот джоинами
                 // _springJoint = null;
             }
         }
@@ -102,7 +104,7 @@ namespace Camera
                 dir *= _dragSpeed;
                 _blockRigidbody.velocity = dir;
             }
-            // if (_springJoint != null)
+            // if (_springJoint != null) // поворот джоинами
             // {
             //     Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             //     Vector2 mouse2D = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);

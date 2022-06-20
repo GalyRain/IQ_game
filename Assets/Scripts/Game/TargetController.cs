@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Game
 {
@@ -14,8 +13,6 @@ namespace Game
         private Vector3 mousePositionB;
         
         private float _angle;
-        private float _doubleClickTime = 0.25f;
-        private float _lastClickTime;
         
         private void Awake()
         {
@@ -41,14 +38,7 @@ namespace Game
             _angle = Vector2.SignedAngle(mousePositionA - position,
                 mousePositionB - position);
 
-            if (_blockRotation.y == 180)
-            {
-                block.transform.rotation = Quaternion.Euler(0, 180,  - _angle +_blockRotation.z);
-            }
-            else 
-            {
-                block.transform.rotation = Quaternion.Euler(0, 0,  _angle  + _blockRotation.z);
-            }
+            block.transform.rotation = _blockRotation.y >= 180 ? Quaternion.Euler(0, 180,  - _angle +_blockRotation.z) : Quaternion.Euler(0, 0,  _angle  + _blockRotation.z);
         }
     }
 }
