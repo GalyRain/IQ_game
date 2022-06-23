@@ -6,7 +6,7 @@ namespace Camera
     {
         private const float TargetSizeX = 1920.0f;
         private const float TargetSizeY = 1080.0f;
-        private const float HalfSize = 200.0f; // половина высоты в пикселях
+        private const float HalfSize = 200.0f; // half the height in pixels
 
         private void Awake()
         {

@@ -1,10 +1,13 @@
 using System.Collections;
+using Data;
 using UnityEngine;
 
 namespace UI
 {
     public class UIManager : MonoBehaviour
     {
+        private string level = "1";
+        [Header("Level elements")]
         [SerializeField] private GameObject blockOne;
         [SerializeField] private GameObject blockTwo;
         [SerializeField] private GameObject blockThree;
@@ -22,13 +25,13 @@ namespace UI
         [SerializeField] private GameObject helpModelTwo;
         [SerializeField] private GameObject helpModelThree;
         [SerializeField] private GameObject helpModelFour;
-        
+        [Header("Setting")]
         [SerializeField] private GameObject startPanel;
         [SerializeField] private GameObject gamePanel;
         [SerializeField] private GameObject rulesPanel;
+        [Header("Game")]
+        [SerializeField] private GameObject gameBlock;
         [SerializeField] private GameObject rulesText;
-        
-        [SerializeField] private GameObject gameBlocks;
         [SerializeField] private GameObject wrongText;
         [SerializeField] private GameObject wonText;
 
@@ -65,34 +68,35 @@ namespace UI
         
         private bool CheckPosition()
         {
-            if (Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) < 7.1f
-                && Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) > 6.6f)
+            float[] values = DataGame.CheckDistance(level);
+            if (Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) < values[0]
+                && Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) > values[1])
             {
                 _isOneTwo = true;
             }
         
-            if (Vector3.Distance(blockOne.transform.position, blockThree.transform.position) < 6.9f
-                && Vector3.Distance(blockOne.transform.position, blockThree.transform.position) > 6.3f)
+            if (Vector3.Distance(blockOne.transform.position, blockThree.transform.position) < values[2]
+                && Vector3.Distance(blockOne.transform.position, blockThree.transform.position) > values[3])
             {
                 _isOneThree = true;
             }
-            if (Vector3.Distance(blockOne.transform.position, blockFour.transform.position) < 3.5f
-                && Vector3.Distance(blockOne.transform.position, blockFour.transform.position) > 3.0f)
+            if (Vector3.Distance(blockOne.transform.position, blockFour.transform.position) < values[4]
+                && Vector3.Distance(blockOne.transform.position, blockFour.transform.position) > values[5])
             {
                 _isOneFour = true;
             }
-            if (Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) < 7.3f
-                && Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) > 6.8f)
+            if (Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) < values[6]
+                && Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) > values[7])
             {
                 _isTwoThree = true;
             }
-            if (Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) < 6.3f
-                && Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) > 5.8f)
+            if (Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) < values[8]
+                && Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) > values[9])
             {
                 _isTwoFour = true;
             }
-            if (Vector3.Distance(blockThree.transform.position, blockFour.transform.position) < 3.7f
-                && Vector3.Distance(blockThree.transform.position, blockFour.transform.position) > 3.2f)
+            if (Vector3.Distance(blockThree.transform.position, blockFour.transform.position) < values[10]
+                && Vector3.Distance(blockThree.transform.position, blockFour.transform.position) > values[11])
             {
                 _isThreeFour = true;
             }
@@ -131,7 +135,7 @@ namespace UI
             rulesPanel.SetActive(false);
             gamePanel.SetActive(true);
             
-            gameBlocks.SetActive(true);
+            gameBlock.SetActive(true);
             wrongText.SetActive(false);
             wonText.SetActive(false);
             
@@ -147,7 +151,7 @@ namespace UI
             gamePanel.SetActive(false);
             rulesPanel.SetActive(false);
             
-            gameBlocks.SetActive(false);
+            gameBlock.SetActive(false);
             helperModel.SetActive(false);
             
             wrongText.SetActive(false);
@@ -170,12 +174,12 @@ namespace UI
             {
                 case false:
                     rulesText.SetActive(true);
-                    gameBlocks.SetActive(false);
+                    gameBlock.SetActive(false);
                     helperBlock.SetActive(false);
                     break;
                 case true:
                     rulesText.SetActive(false);
-                    gameBlocks.SetActive(true);
+                    gameBlock.SetActive(true);
                     helperBlock.SetActive(true);
                     break;
             }
@@ -247,7 +251,7 @@ namespace UI
 
         IEnumerator VisibleSpriteBlock()
         {
-            for (float f = 0.05f; f <= 1; f += 0.05f)
+            for (float f = 1f; f <= 1; f += 0.1f)
             {
                 colorOne = _spriteOne.material.color;
                 colorTwo = _spriteTwo.material.color;
@@ -264,13 +268,13 @@ namespace UI
                 SetColor(_spriteThree, colorThree);
                 SetColor(_spriteFour, colorFour);
                 
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.1f);
             }
         }
         
         IEnumerator InVisibleSpriteBlock()
         {
-            for (float f = 1f; f >= -0.05; f -= 0.05f)
+            for (float f = 1f; f >= -0.1; f -= 0.1f)
             {
                 colorOne = _spriteOne.material.color;
                 colorTwo = _spriteTwo.material.color;
@@ -287,13 +291,13 @@ namespace UI
                 SetColor(_spriteThree, colorThree);
                 SetColor(_spriteFour, colorFour);
                 
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.1f);
             }
         }
 
         IEnumerator VisibleSpriteBlockHelper()
         {
-            for (float f = 0.05f; f <= 1; f += 0.05f)
+            for (float f = 0.1f; f <= 1; f += 0.1f)
             {
                 colorOneHelp = _spriteHelpOne.material.color;
                 colorTwoHelp = _spriteHelpTwo.material.color;
@@ -310,13 +314,13 @@ namespace UI
                 SetColor(_spriteHelpThree, colorThreeHelp);
                 SetColor(_spriteHelpFour, colorFourHelp);
                 
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.1f);
             }
         }
         
         IEnumerator InVisibleSpriteBlockHelper()
         {
-            for (float f = 1f; f >= -0.05; f -= 0.05f)
+            for (float f = 1f; f >= -0.1; f -= 0.1f)
             {
                 colorOneHelp = _spriteHelpOne.material.color;
                 colorTwoHelp = _spriteHelpTwo.material.color;
@@ -333,7 +337,7 @@ namespace UI
                 SetColor(_spriteHelpThree, colorThreeHelp);
                 SetColor(_spriteHelpFour, colorFourHelp);
                 
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.1f);
             }
         }
 

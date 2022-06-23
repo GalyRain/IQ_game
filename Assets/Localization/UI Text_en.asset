@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Text_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f82e4261f17f04f1babaa83ed11ecd54, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 159202140160
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4311038812160
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4784336658432
+    m_Localized: Rules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4902548922368
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4995989626880
+    m_Localized: 'Wrong '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5273598025728
+    m_Localized: You Won!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6344034738176
+    m_Localized: Check
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7293113458688
+    m_Localized: 'It is necessary to assemble the puzzle by combining the shapes.
+
+
+      1.
+      You need to use all the shapes;
+
+      2. Shapes can be moved and rotated;
+
+      3.
+      To rotate the shape, use a circle;
+
+      4. To reflect the shape, use a double
+      tap.
+
+
+      Good luck!!!'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

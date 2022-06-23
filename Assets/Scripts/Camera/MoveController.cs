@@ -34,7 +34,7 @@ namespace Camera
             {
                 if (hit.collider != null && hit.collider.CompareTag("Block"))
                 {
-                    // if (_springJoint != null) // поворот джоинами
+                    // if (_springJoint != null) // use joint
                     // {
                     //     Destroy(_springJoint);
                     //     _springJoint = null;
@@ -47,7 +47,7 @@ namespace Camera
                     }
 
                     selectBlock = hit.transform.gameObject;
-                    // _collider = hit.collider; // поворот джоинами
+                    // _collider = hit.collider; // use joint
                     // _hitPoint = hit.point;
 
                     selectBlock.GetComponent<BlockController>().SetActivated();
@@ -63,7 +63,7 @@ namespace Camera
                         new Vector3(Input.mousePosition.x, Input.mousePosition.y));
                    
                     
-                    // Vector3 localHit = selectBlock.transform.InverseTransformPoint(hit.point); // поворот джоинами
+                    // Vector3 localHit = selectBlock.transform.InverseTransformPoint(hit.point); // use joint
                     // _springJoint = selectBlock.gameObject.AddComponent<SpringJoint2D>();
                     // _springJoint.connectedBody = null;
                     // _springJoint.enabled = true;
@@ -90,7 +90,7 @@ namespace Camera
                     _blockRigidbody.mass = 100f;
                 }
                 _blockRigidbody = null;
-                // Destroy(_springJoint); // поворот джоинами
+                // Destroy(_springJoint); // use joint
                 // _springJoint = null;
             }
         }
@@ -104,7 +104,7 @@ namespace Camera
                 dir *= _dragSpeed;
                 _blockRigidbody.velocity = dir;
             }
-            // if (_springJoint != null) // поворот джоинами
+            // if (_springJoint != null) // use joint 
             // {
             //     Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             //     Vector2 mouse2D = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);

@@ -33,7 +33,7 @@ namespace Game
             {
                 transform.Rotate(Vector3.down, 180);
             }
-            // if (eventData.clickCount == 2) // баг в unity не работает на смартфоне
+            // if (eventData.clickCount == 2) // doesn't work on smartphone
             // {
             //     transform.Rotate(Vector3.down, 180);
             // }
