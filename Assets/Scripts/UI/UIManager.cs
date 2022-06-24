@@ -1,5 +1,6 @@
 using System.Collections;
 using Data;
+using ScriptableObject;
 using UnityEngine;
 
 namespace UI
@@ -7,16 +8,15 @@ namespace UI
     public class UIManager : MonoBehaviour
     {
         private string level = "1";
+        
+        [Header("Level data")]
+        [SerializeField] private LevelData levelData = null;
+        
         [Header("Level elements")]
         [SerializeField] private GameObject blockOne;
         [SerializeField] private GameObject blockTwo;
         [SerializeField] private GameObject blockThree;
         [SerializeField] private GameObject blockFour;
-        
-        [SerializeField] private GameObject modelOne;
-        [SerializeField] private GameObject modelTwo;
-        [SerializeField] private GameObject modelThree;
-        [SerializeField] private GameObject modelFour;
         
         [SerializeField] private GameObject helperBlock;
         [SerializeField] private GameObject helperModel;
@@ -25,10 +25,13 @@ namespace UI
         [SerializeField] private GameObject helpModelTwo;
         [SerializeField] private GameObject helpModelThree;
         [SerializeField] private GameObject helpModelFour;
+        
         [Header("Setting")]
         [SerializeField] private GameObject startPanel;
-        [SerializeField] private GameObject gamePanel;
+        [SerializeField] private GameObject levelsPanel;
         [SerializeField] private GameObject rulesPanel;
+        [SerializeField] private GameObject gamePanel;
+        
         [Header("Game")]
         [SerializeField] private GameObject gameBlock;
         [SerializeField] private GameObject rulesText;
@@ -45,10 +48,10 @@ namespace UI
     
         private void Start()
         {
-            _spriteOne = modelOne.GetComponent<MeshRenderer>();
-            _spriteTwo = modelTwo.GetComponent<MeshRenderer>();
-            _spriteThree = modelThree.GetComponent<MeshRenderer>();
-            _spriteFour = modelFour.GetComponent<MeshRenderer>();
+            _spriteOne = blockOne.GetComponentInChildren<MeshRenderer>();
+            _spriteTwo = blockTwo.GetComponentInChildren<MeshRenderer>();
+            _spriteThree = blockThree.GetComponentInChildren<MeshRenderer>();
+            _spriteFour = blockFour.GetComponentInChildren<MeshRenderer>();
             
             _spriteHelpOne = helpModelOne.GetComponent<MeshRenderer>();
             _spriteHelpTwo = helpModelTwo.GetComponent<MeshRenderer>();
@@ -128,13 +131,11 @@ namespace UI
                 wrongText.SetActive(true);
             }
         }
-    
-        public void StartButton()
+
+        public void SelectLevel()
         {
-            startPanel.SetActive(false);
             rulesPanel.SetActive(false);
-            gamePanel.SetActive(true);
-            
+            startPanel.SetActive(false);
             gameBlock.SetActive(true);
             wrongText.SetActive(false);
             wonText.SetActive(false);
@@ -143,17 +144,15 @@ namespace UI
             CheckFalse();
             _isHelpVisible = false;
         }
-        
+
         public void BackButton()
         {
             SetColorValue();
-            startPanel.SetActive(true);
+            levelsPanel.SetActive(true);
             gamePanel.SetActive(false);
             rulesPanel.SetActive(false);
             
-            gameBlock.SetActive(false);
             helperModel.SetActive(false);
-            
             wrongText.SetActive(false);
             rulesText.SetActive(false);
             
@@ -161,13 +160,7 @@ namespace UI
             _isHelpVisible = false;
             _isHelpBlockVisible = false;
         }
-        
-        public void RulesButton()
-        {
-            startPanel.SetActive(false);
-            rulesPanel.SetActive(true);
-        }
-        
+
         public void GameRulesButton()
         {
             switch (_isRulesVisible)

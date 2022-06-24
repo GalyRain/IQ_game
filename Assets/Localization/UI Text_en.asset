@@ -65,6 +65,18 @@ MonoBehaviour:
       Good luck!!!'
     m_Metadata:
       m_Items: []
+  - m_Id: 7261204987764736
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7265765173485568
+    m_Localized: Level 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7275502321524736
+    m_Localized: Level 2
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

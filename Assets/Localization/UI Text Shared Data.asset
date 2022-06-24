@@ -47,6 +47,18 @@ MonoBehaviour:
     m_Key: Rules Text
     m_Metadata:
       m_Items: []
+  - m_Id: 7261204987764736
+    m_Key: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7265765173485568
+    m_Key: Level 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7275502321524736
+    m_Key: Level 2
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
