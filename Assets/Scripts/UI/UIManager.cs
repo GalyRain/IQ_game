@@ -1,30 +1,18 @@
 using System.Collections;
 using Data;
-using ScriptableObject;
 using UnityEngine;
 
 namespace UI
 {
     public class UIManager : MonoBehaviour
     {
-        private string level = "1";
+        [Header("GameObjects")]
+        [SerializeField] private GameObject levelOneGame;
+        [SerializeField] private GameObject levelTwoGame;
         
         [Header("Level data")]
-        [SerializeField] private LevelData levelData = null;
-        
-        [Header("Level elements")]
-        [SerializeField] private GameObject blockOne;
-        [SerializeField] private GameObject blockTwo;
-        [SerializeField] private GameObject blockThree;
-        [SerializeField] private GameObject blockFour;
-        
-        [SerializeField] private GameObject helperBlock;
-        [SerializeField] private GameObject helperModel;
-        
-        [SerializeField] private GameObject helpModelOne;
-        [SerializeField] private GameObject helpModelTwo;
-        [SerializeField] private GameObject helpModelThree;
-        [SerializeField] private GameObject helpModelFour;
+        [SerializeField] private LevelInfo levelOne;
+        [SerializeField] private LevelInfo levelTwo;
         
         [Header("Setting")]
         [SerializeField] private GameObject startPanel;
@@ -37,93 +25,114 @@ namespace UI
         [SerializeField] private GameObject rulesText;
         [SerializeField] private GameObject wrongText;
         [SerializeField] private GameObject wonText;
+        [SerializeField] private GameObject checkButton;
+        [SerializeField] private GameObject continueButton;
 
-        private bool _isOneTwo, _isOneThree, _isOneFour, _isTwoThree, _isTwoFour, _isThreeFour, _isRight;
+        private UILevelController _uiLevelController;
+        private LevelInfo levelInfo;
+
+        private bool _isOneTwo, _isOneFive, _isTwoThree, _isThreeFour, _isFourFive, _isFourOne, _isRight;
         private bool _isRulesVisible, _isHelpVisible, _isHelpBlockVisible;
 
-        private MeshRenderer _spriteOne, _spriteTwo, _spriteThree, _spriteFour, _spriteHelpOne, _spriteHelpTwo,
-            _spriteHelpThree, _spriteHelpFour;
+        private MeshRenderer _spriteOne, _spriteTwo, _spriteThree, _spriteFour, _spriteFive,
+            _spriteHelpOne, _spriteHelpTwo, _spriteHelpThree, _spriteHelpFour, _spriteHelpFive;
 
-        private Color colorOne, colorTwo, colorThree, colorFour, colorOneHelp, colorTwoHelp, colorThreeHelp, colorFourHelp;
+        private Color colorOne, colorTwo, colorThree, colorFour, colorFive,
+            colorOneHelp, colorTwoHelp, colorThreeHelp, colorFourHelp, colorFiveHelp;
     
-        private void Start()
+        private void GetComponent()
         {
-            _spriteOne = blockOne.GetComponentInChildren<MeshRenderer>();
-            _spriteTwo = blockTwo.GetComponentInChildren<MeshRenderer>();
-            _spriteThree = blockThree.GetComponentInChildren<MeshRenderer>();
-            _spriteFour = blockFour.GetComponentInChildren<MeshRenderer>();
+            _spriteOne = levelInfo.blockOne.GetComponentInChildren<MeshRenderer>();
+            _spriteTwo = levelInfo.blockTwo.GetComponentInChildren<MeshRenderer>();
+            _spriteThree = levelInfo.blockThree.GetComponentInChildren<MeshRenderer>();
+            _spriteFour = levelInfo.blockFour.GetComponentInChildren<MeshRenderer>();
+            _spriteFive = levelInfo.blockFive.GetComponentInChildren<MeshRenderer>();
             
-            _spriteHelpOne = helpModelOne.GetComponent<MeshRenderer>();
-            _spriteHelpTwo = helpModelTwo.GetComponent<MeshRenderer>();
-            _spriteHelpThree = helpModelThree.GetComponent<MeshRenderer>();
-            _spriteHelpFour = helpModelFour.GetComponent<MeshRenderer>();
+            _spriteHelpOne = levelInfo.helpModelOne.GetComponent<MeshRenderer>();
+            _spriteHelpTwo = levelInfo.helpModelTwo.GetComponent<MeshRenderer>();
+            _spriteHelpThree = levelInfo.helpModelThree.GetComponent<MeshRenderer>();
+            _spriteHelpFour = levelInfo.helpModelFour.GetComponent<MeshRenderer>();
+            _spriteHelpFive = levelInfo.helpModelFive.GetComponent<MeshRenderer>();
             
             colorOneHelp = _spriteHelpOne.material.color;
             colorTwoHelp = _spriteHelpTwo.material.color;
             colorThreeHelp = _spriteHelpThree.material.color;
             colorFourHelp = _spriteHelpFour.material.color;
+            colorFiveHelp = _spriteHelpFive.material.color;
             
             colorOne = _spriteOne.material.color;
             colorTwo = _spriteTwo.material.color;
             colorThree = _spriteThree.material.color;
             colorFour = _spriteFour.material.color;
+            colorFive = _spriteFive.material.color;
         }
         
         private bool CheckPosition()
         {
-            float[] values = DataGame.CheckDistance(level);
-            if (Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) < values[0]
-                && Vector3.Distance(blockOne.transform.position, blockTwo.transform.position) > values[1])
+            float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+            if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0]
+                && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[1])
             {
                 _isOneTwo = true;
             }
-        
-            if (Vector3.Distance(blockOne.transform.position, blockThree.transform.position) < values[2]
-                && Vector3.Distance(blockOne.transform.position, blockThree.transform.position) > values[3])
+            if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[2]
+                && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[3])
             {
-                _isOneThree = true;
+                _isOneFive = true;
+                
             }
-            if (Vector3.Distance(blockOne.transform.position, blockFour.transform.position) < values[4]
-                && Vector3.Distance(blockOne.transform.position, blockFour.transform.position) > values[5])
-            {
-                _isOneFour = true;
-            }
-            if (Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) < values[6]
-                && Vector3.Distance(blockTwo.transform.position, blockThree.transform.position) > values[7])
+            if (Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[4]
+                && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[5])
             {
                 _isTwoThree = true;
             }
-            if (Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) < values[8]
-                && Vector3.Distance(blockTwo.transform.position, blockFour.transform.position) > values[9])
-            {
-                _isTwoFour = true;
-            }
-            if (Vector3.Distance(blockThree.transform.position, blockFour.transform.position) < values[10]
-                && Vector3.Distance(blockThree.transform.position, blockFour.transform.position) > values[11])
+            if (Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[6]
+                && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[7])
             {
                 _isThreeFour = true;
             }
+            if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[8]
+                && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[9])
+            {
+                _isFourFive = true;
+            }
+            if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockOne.transform.position) < values[10]
+                && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockOne.transform.position) > values[11])
+            {
+                _isFourOne = true; 
+            }
 
-            if (_isOneTwo && _isOneThree && _isOneFour && _isTwoThree && _isTwoFour && _isThreeFour)
+            Debug.Log("_isOneTwo" + _isOneTwo);
+            Debug.Log("_isOneFive" + _isOneFive);
+            Debug.Log("_isTwoThree" + _isTwoThree);
+            Debug.Log("_isThreeFour" + _isThreeFour);
+            Debug.Log("_isFourFive" + _isFourFive);
+            Debug.Log("_isFourOne" + _isFourOne); 
+            
+            if (_isOneTwo && _isOneFive && _isTwoThree && _isThreeFour && _isFourFive && _isFourOne)
             {
                 _isRight = true;
             }
             return _isRight;
         }
-
+        
         public void CheckButton()
         {
-            // Debug.Log(Vector3.Distance(blockOne.transform.position, blockTwo.transform.position));
-            // Debug.Log(Vector3.Distance(blockOne.transform.position, blockThree.transform.position));
-            // Debug.Log(Vector3.Distance(blockOne.transform.position, blockFour.transform.position));
-            // Debug.Log(Vector3.Distance(blockTwo.transform.position, blockThree.transform.position));
-            // Debug.Log(Vector3.Distance(blockTwo.transform.position, blockFour.transform.position));
-            // Debug.Log(Vector3.Distance(blockThree.transform.position, blockFour.transform.position));
-            // Debug.Log(CheckPosition());
+            Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockOne.transform.position));
             if (CheckPosition())
             {
                 wrongText.SetActive(false);
                 wonText.SetActive(true);
+                StartCoroutine(nameof(InVisibleSpriteBlock));
+                StartCoroutine(nameof(VisibleSpriteBlockHelper));
+                checkButton.SetActive(false);
+                continueButton.SetActive(true);
+                UILevelController.LevelComplete = levelInfo.levelNumber;
             }
             else
             {
@@ -132,6 +141,18 @@ namespace UI
             }
         }
 
+        public void SelectOne()
+        {
+            levelInfo = levelOne;
+            GetComponent();
+        }
+        
+        public void SelectTwo()
+        {
+            levelInfo = levelTwo;
+            GetComponent();
+        }
+        
         public void SelectLevel()
         {
             rulesPanel.SetActive(false);
@@ -139,20 +160,25 @@ namespace UI
             gameBlock.SetActive(true);
             wrongText.SetActive(false);
             wonText.SetActive(false);
+            checkButton.SetActive(true);
+            continueButton.SetActive(false);
             
-            RandomPosition();
             CheckFalse();
             _isHelpVisible = false;
         }
 
         public void BackButton()
         {
+            RandomPosition();
             SetColorValue();
             levelsPanel.SetActive(true);
             gamePanel.SetActive(false);
             rulesPanel.SetActive(false);
             
-            helperModel.SetActive(false);
+            checkButton.SetActive(true);
+            continueButton.SetActive(false);
+            
+            levelInfo.helperModel.SetActive(false);
             wrongText.SetActive(false);
             rulesText.SetActive(false);
             
@@ -168,12 +194,12 @@ namespace UI
                 case false:
                     rulesText.SetActive(true);
                     gameBlock.SetActive(false);
-                    helperBlock.SetActive(false);
+                    levelInfo.helperView.SetActive(false);
                     break;
                 case true:
                     rulesText.SetActive(false);
                     gameBlock.SetActive(true);
-                    helperBlock.SetActive(true);
+                    levelInfo.helperView.SetActive(true);
                     break;
             }
 
@@ -184,7 +210,7 @@ namespace UI
         {
             if (!_isHelpVisible && !_isHelpBlockVisible)
             {
-                helperModel.SetActive(true);
+                levelInfo.helperModel.SetActive(true);
                 _isHelpVisible = true;
                 return;
             }
@@ -208,7 +234,7 @@ namespace UI
             
             if (!_isHelpVisible && _isHelpBlockVisible)
             {
-                helperModel.SetActive(false);
+                levelInfo.helperModel.SetActive(false);
                 _isHelpBlockVisible = false;
             }
         }
@@ -217,29 +243,45 @@ namespace UI
         {
             Application.Quit();
         }
+        
+        public void ContinueButton()
+        {
+            switch (UILevelController.LevelComplete)
+            {
+                case 0:
+                    levelOneGame.SetActive(true);
+                    SelectOne();
+                    break;
+                case 1:
+                    levelOneGame.SetActive(false);
+                    levelTwoGame.SetActive(true);
+                    SelectTwo();
+                    break;
+            }
+        }
     
         private void RandomPosition()
         {
-            blockOne.transform.rotation = Quaternion.Euler(0, 0, 0);
-            blockTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
-            blockThree.transform.rotation = Quaternion.Euler(0, 0, 0);
-            blockFour.transform.rotation = Quaternion.Euler(0, 0, 0);
+            levelInfo.blockOne.transform.rotation = Quaternion.Euler(0, 0, 0);
+            levelInfo.blockTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
+            levelInfo.blockThree.transform.rotation = Quaternion.Euler(0, 0, 0);
+            levelInfo.blockFour.transform.rotation = Quaternion.Euler(0, 0, 0);
             
-            blockOne.transform.position = new Vector3(Random.Range(-6f, 0f), Random.Range(0f, 8f), 0f);
-            blockTwo.transform.position = new Vector3(Random.Range(-6f, 0f), Random.Range(-8f, 0f), 0f);
-            blockThree.transform.position = new Vector3(Random.Range(0f, 6f), Random.Range(0f, 8f), 0f);
-            blockFour.transform.position = new Vector3(Random.Range(0, 6f), Random.Range(-8f, 0f), 0f);
+            levelInfo.blockOne.transform.position = new Vector3(Random.Range(-6f, 0f), Random.Range(0f, 8f), 0f);
+            levelInfo.blockTwo.transform.position = new Vector3(Random.Range(-6f, 0f), Random.Range(-8f, 0f), 0f);
+            levelInfo.blockThree.transform.position = new Vector3(Random.Range(0f, 6f), Random.Range(0f, 8f), 0f);
+            levelInfo.blockFour.transform.position = new Vector3(Random.Range(0, 6f), Random.Range(-8f, 0f), 0f);
         }
 
         private void CheckFalse()
         {
             _isRight = false;
             _isOneTwo = false;
-            _isOneThree = false;
-            _isOneFour = false;
+            _isOneFive = false;
             _isTwoThree = false;
-            _isTwoFour = false;
             _isThreeFour = false;
+            _isFourFive = false;
+            _isFourOne = false;
         }
 
         IEnumerator VisibleSpriteBlock()
@@ -250,16 +292,19 @@ namespace UI
                 colorTwo = _spriteTwo.material.color;
                 colorThree = _spriteThree.material.color;
                 colorFour = _spriteFour.material.color;
+                colorFive = _spriteFive.material.color;
                 
                 colorOne.a = f;
                 colorTwo.a = f;
                 colorThree.a = f;
                 colorFour.a = f;
+                colorFive.a = f;
                 
                 SetColor(_spriteOne, colorOne);
                 SetColor(_spriteTwo, colorTwo);
                 SetColor(_spriteThree, colorThree);
                 SetColor(_spriteFour, colorFour);
+                SetColor(_spriteFive, colorFive);
                 
                 yield return new WaitForSeconds(0.1f);
             }
@@ -273,16 +318,19 @@ namespace UI
                 colorTwo = _spriteTwo.material.color;
                 colorThree = _spriteThree.material.color;
                 colorFour = _spriteFour.material.color;
+                colorFive = _spriteFive.material.color;
                 
                 colorOne.a = f;
                 colorTwo.a = f;
                 colorThree.a = f;
                 colorFour.a = f;
+                colorFive.a = f;
                 
                 SetColor(_spriteOne, colorOne);
                 SetColor(_spriteTwo, colorTwo);
                 SetColor(_spriteThree, colorThree);
                 SetColor(_spriteFour, colorFour);
+                SetColor(_spriteFive, colorFive);
                 
                 yield return new WaitForSeconds(0.1f);
             }
@@ -296,16 +344,19 @@ namespace UI
                 colorTwoHelp = _spriteHelpTwo.material.color;
                 colorThreeHelp = _spriteHelpThree.material.color;
                 colorFourHelp = _spriteHelpFour.material.color;
+                colorFiveHelp = _spriteHelpFive.material.color;
                 
                 colorOneHelp.a = f;
                 colorTwoHelp.a = f;
                 colorThreeHelp.a = f;
                 colorFourHelp.a = f;
+                colorFiveHelp.a = f;
                 
                 SetColor(_spriteHelpOne, colorOneHelp);
                 SetColor(_spriteHelpTwo, colorTwoHelp);
                 SetColor(_spriteHelpThree, colorThreeHelp);
                 SetColor(_spriteHelpFour, colorFourHelp);
+                SetColor(_spriteHelpFive, colorFiveHelp);
                 
                 yield return new WaitForSeconds(0.1f);
             }
@@ -319,16 +370,19 @@ namespace UI
                 colorTwoHelp = _spriteHelpTwo.material.color;
                 colorThreeHelp = _spriteHelpThree.material.color;
                 colorFourHelp = _spriteHelpFour.material.color;
+                colorFiveHelp = _spriteHelpFive.material.color;
                 
                 colorOneHelp.a = f;
                 colorTwoHelp.a = f;
                 colorThreeHelp.a = f;
                 colorFourHelp.a = f;
+                colorFiveHelp.a = f;
                 
                 SetColor(_spriteHelpOne, colorOneHelp);
                 SetColor(_spriteHelpTwo, colorTwoHelp);
                 SetColor(_spriteHelpThree, colorThreeHelp);
                 SetColor(_spriteHelpFour, colorFourHelp);
+                SetColor(_spriteHelpFive, colorFiveHelp);
                 
                 yield return new WaitForSeconds(0.1f);
             }
@@ -336,25 +390,8 @@ namespace UI
 
         private void SetColorValue()
         {
-            colorOneHelp.a = 0;
-            colorTwoHelp.a = 0;
-            colorThreeHelp.a = 0;
-            colorFourHelp.a = 0;
-            
-            colorOne.a = 1;
-            colorTwo.a = 1;
-            colorThree.a = 1;
-            colorFour.a = 1;
-
-            SetColor(_spriteHelpOne, colorOneHelp);
-            SetColor(_spriteHelpTwo, colorTwoHelp);
-            SetColor(_spriteHelpThree, colorThreeHelp);
-            SetColor(_spriteHelpFour, colorFourHelp);
-
-            SetColor(_spriteOne, colorOne);
-            SetColor(_spriteTwo, colorTwo);
-            SetColor(_spriteThree, colorThree);
-            SetColor(_spriteFour, colorFour);
+            StartCoroutine(nameof(VisibleSpriteBlock));
+            StartCoroutine(nameof(InVisibleSpriteBlockHelper));
         }
 
         private static void SetColor(Renderer renderer, Color color)
