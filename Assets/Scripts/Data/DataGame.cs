@@ -8,11 +8,17 @@ namespace Data
             {
                 case 1:
                 default:
-                    float[] valuesOne = { 7.2f, 6.7f, 25.0f, 0.0f, 7.3f, 6.8f, 3.7f, 3.2f, 25.0f, 0.0f, 3.7f, 3.2f };
+                    float[] valuesOne = { 2.9f, 6.4f, 3.3f};
                     return valuesOne;
                 case 2:
-                    float[] valuesTwo = { 4.3f, 3.8f, 5.9f, 5.4f, 9.5f, 8.5f, 8.0f, 7.0f, 5.6f, 5.1f, 8.1f, 7.6f };
+                    float[] valuesTwo = { 3.7f, 4.1f, 7.1f, 7.5f, 4.7f, 8.0f};
                     return valuesTwo;
+                case 3:
+                    float[] valuesThree = { 5.0f, 5.1f, 5.0f, 5.1f };
+                    return valuesThree;
+                case 4:
+                    float[] valuesFour = { 6.9f, 4.8f, 5.4f, 4.0f };
+                    return valuesFour;
             }
         }
     }

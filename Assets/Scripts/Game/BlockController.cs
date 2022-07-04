@@ -10,6 +10,7 @@ namespace Game
         
         private float _doubleClickTime = 0.25f;
         private float _lastClickTime;
+        private bool _scale;
 
         public void SetActivated()
         {
@@ -31,7 +32,18 @@ namespace Game
             
             if (timeFromLastClick < _doubleClickTime)
             {
-                transform.Rotate(Vector3.down, 180);
+                if (!_scale)
+                {
+                    Debug.Log(_scale);
+                    transform.localScale = new Vector3(-1,1,1);
+                    _scale = true;
+                    return;
+                }
+                if (_scale)
+                {
+                    transform.localScale = new Vector3(1,1,1);
+                    _scale = false;
+                }
             }
             // if (eventData.clickCount == 2) // doesn't work on smartphone
             // {
