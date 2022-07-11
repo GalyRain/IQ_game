@@ -34,7 +34,6 @@ namespace Game
             {
                 if (!_scale)
                 {
-                    Debug.Log(_scale);
                     transform.localScale = new Vector3(-1,1,1);
                     _scale = true;
                     return;

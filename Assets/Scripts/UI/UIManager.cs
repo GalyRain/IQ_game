@@ -11,12 +11,46 @@ namespace UI
         [SerializeField] private GameObject level2Game;
         [SerializeField] private GameObject level3Game;
         [SerializeField] private GameObject level4Game;
+        [SerializeField] private GameObject level5Game;
+        [SerializeField] private GameObject level6Game;
+        [SerializeField] private GameObject level7Game;
+        [SerializeField] private GameObject level8Game;
+        [SerializeField] private GameObject level9Game;
+        [SerializeField] private GameObject level10Game;
+        [SerializeField] private GameObject level11Game;
+        [SerializeField] private GameObject level12Game;
+        [SerializeField] private GameObject level13Game;
+        [SerializeField] private GameObject level14Game;
+        [SerializeField] private GameObject level15Game;
+        [SerializeField] private GameObject level16Game;
+        [SerializeField] private GameObject level17Game;
+        [SerializeField] private GameObject level18Game;
+        [SerializeField] private GameObject level19Game;
+        [SerializeField] private GameObject level20Game;
+        [SerializeField] private GameObject level21Game;
         
         [Header("Level data info")]
         [SerializeField] private LevelInfo level1Info;
         [SerializeField] private LevelInfo level2Info;
         [SerializeField] private LevelInfo level3Info;
         [SerializeField] private LevelInfo level4Info;
+        [SerializeField] private LevelInfo level5Info;
+        [SerializeField] private LevelInfo level6Info;
+        [SerializeField] private LevelInfo level7Info;
+        [SerializeField] private LevelInfo level8Info;
+        [SerializeField] private LevelInfo level9Info;
+        [SerializeField] private LevelInfo level10Info;
+        [SerializeField] private LevelInfo level11Info;
+        [SerializeField] private LevelInfo level12Info;
+        [SerializeField] private LevelInfo level13Info;
+        [SerializeField] private LevelInfo level14Info;
+        [SerializeField] private LevelInfo level15Info;
+        [SerializeField] private LevelInfo level16Info;
+        [SerializeField] private LevelInfo level17Info;
+        [SerializeField] private LevelInfo level18Info;
+        [SerializeField] private LevelInfo level19Info;
+        [SerializeField] private LevelInfo level20Info;
+        [SerializeField] private LevelInfo level21Info;
         
         [Header("Setting")]
         [SerializeField] private GameObject startPanel;
@@ -45,6 +79,7 @@ namespace UI
 
         private float _allowance = 0.3f;
         private float _allowanceLong = 1.5f;
+        private int levelContinue = 0;
     
         private void GetComponent()
         {
@@ -78,20 +113,6 @@ namespace UI
             if (levelInfo.levelNumber == 1)
             {
                 float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
-                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[0] + _allowance
-                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[0] - _allowance &&
-                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
-                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
-                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) < values[2] + _allowance
-                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) > values[2] -_allowance)
-                {
-                    _isPositionBlockRight = true;
-                }
-            }
-
-            if (levelInfo.levelNumber == 2)
-            {
-                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
                 if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
                     && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance && 
                     Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
@@ -110,7 +131,7 @@ namespace UI
                     Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
                     && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
                     Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
-                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance&&
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowanceLong
                     && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[3] - _allowanceLong &&
                     Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance 
@@ -121,10 +142,10 @@ namespace UI
                 
                 if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
                     && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance && 
-                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
-                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
-                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
-                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[5] + _allowanceLong
                     && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[5] - _allowanceLong &&
                     Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
@@ -140,6 +161,24 @@ namespace UI
                     && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[5] + _allowanceLong
                     && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[5] - _allowanceLong &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[4] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+
+            if (levelInfo.levelNumber == 2)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance && 
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowanceLong
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowanceLong &&
                     Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
                     && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[4] - _allowance)
                 {
@@ -183,14 +222,388 @@ namespace UI
                 {
                     _isPositionBlockRight = true;
                 }
-                
-                // Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position));
-                // Debug.Log(Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position));
-                // Debug.Log(Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockTwo.transform.position));
-                // Debug.Log(Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockOne.transform.position));
+            }
+
+            if (levelInfo.levelNumber == 4)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockTwo.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockTwo.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
             }
             
-            if (levelInfo.levelNumber == 4)
+            if (levelInfo.levelNumber == 5)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+
+            if (levelInfo.levelNumber == 6)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[4] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[4] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 7)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 8)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                if (Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[2] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 9)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 10)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 11)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 12)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[3] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[4] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[4] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[4] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 13)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[4] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 14)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[4] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[4] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 15)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 16)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) > values[2] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+
+            if (levelInfo.levelNumber == 17)
             {
                 float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
                 if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[0] + _allowance
@@ -204,23 +617,23 @@ namespace UI
                 {
                     _isPositionBlockRight = true;
                 }
-                
+
                 if (Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[0] + _allowance
                     && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[0] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[1] + _allowance
                     && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance &&
-                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowance
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) <  values[2] + _allowance
                     && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[2] - _allowance &&
                     Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
                     && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[3] - _allowance)
                 {
                     _isPositionBlockRight = true;
                 }
-                
+
                 if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
                     && Vector3.Distance(levelInfo.blockFive.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[1] + _allowance
-                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance &&
+                    && Vector3.Distance(levelInfo.blockThree.transform.position,  levelInfo.blockFive.transform.position) > values[1] - _allowance &&
                     Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[2] + _allowance
                     && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[2] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
@@ -228,19 +641,111 @@ namespace UI
                 {
                     _isPositionBlockRight = true;
                 }
-                
+
                 if (Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) < values[0] + _allowance
-                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance&&
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position) > values[0] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[1] + _allowance
-                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance&&
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[1] - _allowance &&
                     Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[2] + _allowance
-                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[2] - _allowance&&
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[2] - _allowance &&
                     Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[3] + _allowance
                     && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[3] - _allowance)
                 {
                     _isPositionBlockRight = true;
                 }
             }
+            
+            if (levelInfo.levelNumber == 18)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[2] -_allowance  &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+
+            if (levelInfo.levelNumber == 19)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowanceLong
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowanceLong  &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 20)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowanceLong
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[2] -_allowanceLong  &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) < values[2] + _allowanceLong
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position) > values[2] -_allowanceLong  &&
+                    Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFive.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            
+            if (levelInfo.levelNumber == 21)
+            {
+                float[] values = DataGame.CheckDistance(levelInfo.levelNumber);
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowanceLong
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowanceLong  &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockTwo.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockTwo.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+                
+                if (Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) < values[0] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position) > values[0] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) < values[1] + _allowance
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFour.transform.position) > values[1] - _allowance &&
+                    Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) < values[2] + _allowanceLong
+                    && Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockFive.transform.position) > values[2] -_allowanceLong  &&
+                    Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) < values[3] + _allowance
+                    && Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockThree.transform.position) > values[3] -_allowance)
+                {
+                    _isPositionBlockRight = true;
+                }
+            }
+            Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockThree.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockTwo.transform.position, levelInfo.blockFive.transform.position));
+            Debug.Log(Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position));
             return _isPositionBlockRight;
         }
         
@@ -254,6 +759,7 @@ namespace UI
                 StartCoroutine(nameof(VisibleSpriteBlockHelper));
                 checkButton.SetActive(false);
                 continueButton.SetActive(true);
+                levelContinue = levelInfo.levelNumber;
                 UILevelController.LevelComplete = levelInfo.levelNumber;
             }
             else
@@ -291,6 +797,125 @@ namespace UI
             SelectLevel();
         }
         
+        public void SelectLevel5()
+        {
+            level5Game.SetActive(true);
+            levelInfo = level5Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel6()
+        {
+            level6Game.SetActive(true);
+            levelInfo = level6Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel7()
+        {
+            level7Game.SetActive(true);
+            levelInfo = level7Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel8()
+        {
+            level8Game.SetActive(true);
+            levelInfo = level8Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel9()
+        {
+            level9Game.SetActive(true);
+            levelInfo = level9Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel10()
+        {
+            level10Game.SetActive(true);
+            levelInfo = level10Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel11()
+        {
+            level11Game.SetActive(true);
+            levelInfo = level11Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel12()
+        {
+            level12Game.SetActive(true);
+            levelInfo = level12Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel13()
+        {
+            level13Game.SetActive(true);
+            levelInfo = level13Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel14()
+        {
+            level14Game.SetActive(true);
+            levelInfo = level14Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel15()
+        {
+            level15Game.SetActive(true);
+            levelInfo = level15Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel16()
+        {
+            level16Game.SetActive(true);
+            levelInfo = level16Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel17()
+        {
+            level17Game.SetActive(true);
+            levelInfo = level17Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel18()
+        {
+            level18Game.SetActive(true);
+            levelInfo = level18Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel19()
+        {
+            level19Game.SetActive(true);
+            levelInfo = level19Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel20()
+        {
+            level20Game.SetActive(true);
+            levelInfo = level20Info;
+            SelectLevel();
+        }
+        
+        public void SelectLevel21()
+        {
+            level21Game.SetActive(true);
+            levelInfo = level21Info;
+            SelectLevel();
+        }
+
         private void SelectLevel()
         {
             gamePanel.SetActive(true);
@@ -388,31 +1013,94 @@ namespace UI
         
         public void ContinueButton()
         {
-            switch (levelInfo.levelNumber)
+            switch (levelContinue)
             {
-                case 0:
                 default:
-                    level1Game.SetActive(true);
+                case 0:
                     SelectLevel1();
                     break;
                 case 1:
                     level1Game.SetActive(false);
-                    level2Game.SetActive(true);
                     SelectLevel2();
                     break;
                 case 2:
                     level2Game.SetActive(false);
-                    level3Game.SetActive(true);
                     SelectLevel3();
                     break;
                 case 3:
                     level3Game.SetActive(false);
-                    level4Game.SetActive(true);
                     SelectLevel4();
                     break;
                 case 4:
-                    level1Game.SetActive(true);
                     level4Game.SetActive(false);
+                    SelectLevel5();
+                    break;
+                case 5:
+                    level5Game.SetActive(false);
+                    SelectLevel6();
+                    break;
+                case 6:
+                    level6Game.SetActive(false);
+                    SelectLevel7();
+                    break;
+                case 7:
+                    level7Game.SetActive(false);
+                    SelectLevel8();
+                    break;
+                case 8:
+                    level8Game.SetActive(false);
+                    SelectLevel9();
+                    break;
+                case 9:
+                    level9Game.SetActive(false);
+                    SelectLevel10();
+                    break;
+                case 10:
+                    level10Game.SetActive(false);
+                    SelectLevel11();
+                    break;
+                case 11:
+                    level11Game.SetActive(false);
+                    SelectLevel12();
+                    break;
+                case 12:
+                    level12Game.SetActive(false);
+                    SelectLevel13();
+                    break;
+                case 13:
+                    level13Game.SetActive(false);
+                    SelectLevel14();
+                    break;
+                case 14:
+                    level14Game.SetActive(false);
+                    SelectLevel15();
+                    break;
+                case 15:
+                    level15Game.SetActive(false);
+                    SelectLevel16();
+                    break;
+                case 16:
+                    level16Game.SetActive(false);
+                    SelectLevel17();
+                    break;
+                case 17:
+                    level17Game.SetActive(false);
+                    SelectLevel18();
+                    break;
+                case 18:
+                    level18Game.SetActive(false);
+                    SelectLevel19();
+                    break;
+                case 19:
+                    level19Game.SetActive(false);
+                    SelectLevel20();
+                    break;
+                case 20:
+                    level20Game.SetActive(false);
+                    SelectLevel21();
+                    break;
+                case 21:
+                    level21Game.SetActive(false);
                     SelectLevel1();
                     break;
             }
@@ -430,6 +1118,7 @@ namespace UI
             levelInfo.blockTwo.transform.position = new Vector3(Random.Range(-6f, 0f), Random.Range(-8f, 0f), 0f);
             levelInfo.blockThree.transform.position = new Vector3(Random.Range(0f, 6f), Random.Range(0f, 8f), 0f);
             levelInfo.blockFour.transform.position = new Vector3(Random.Range(0, 6f), Random.Range(-8f, 0f), 0f);
+            levelInfo.blockFive.transform.position = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
         }
 
         IEnumerator VisibleSpriteBlock()
@@ -482,8 +1171,6 @@ namespace UI
                 
                 yield return new WaitForSeconds(0.1f);
             }
-
-            
         }
 
         IEnumerator VisibleSpriteBlockHelper()

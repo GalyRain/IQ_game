@@ -35,8 +35,7 @@ namespace Game
             mousePositionB = _camera.ScreenToWorldPoint(Input.mousePosition);
             var position = transform.position;
 
-            _angle = Vector2.SignedAngle(mousePositionA - position,
-                mousePositionB - position);
+            _angle = Vector2.SignedAngle(mousePositionA - position, mousePositionB - position);
 
             block.transform.rotation = _blockRotation.y >= 180 ? Quaternion.Euler(0, 180,  - _angle +_blockRotation.z) : Quaternion.Euler(0, 0,  _angle  + _blockRotation.z);
         }
