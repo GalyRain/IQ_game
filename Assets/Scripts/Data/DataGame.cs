@@ -6,7 +6,6 @@ namespace Data
         {
             switch (level)
             {
-                case 1:
                 default:
                     float[] valuesOne = { 3.7f, 4.1f, 7.1f, 7.5f, 4.7f, 9.5f };
                     return valuesOne;
@@ -41,7 +40,7 @@ namespace Data
                     float[] valuesEleven = { 3.3f, 2.6f, 2.3f, 1.8f };
                     return valuesEleven;
                 case 12:
-                    float[] valuesTwelve = { 4.4f, 4.7f, 2.7f, 5.8f, 3.1f };
+                    float[] valuesTwelve = { 4.5f, 4.7f, 2.8f, 3.3f };
                     return valuesTwelve;
                 case 13:
                     float[] valuesThirteen = { 3.5f, 3.7f, 3.6f, 4.3f, 2.0f };
@@ -59,7 +58,7 @@ namespace Data
                     float[] valuesSeventeen = { 6.9f, 4.8f, 5.4f, 4.0f };
                     return valuesSeventeen;
                 case 18:
-                    float[] valuesEighteen = { 6.9f, 5.2f, 2.0f, 5.1f };
+                    float[] valuesEighteen = { 6.9f, 5.2f, 2.0f, 5.5f };
                     return valuesEighteen;
                 case 19:
                     float[] valuesNineteen = { 4.2f, 5.8f, 3.3f, 4.7f };

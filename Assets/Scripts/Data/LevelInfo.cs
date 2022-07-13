@@ -4,6 +4,7 @@ namespace Data
 {
     public class LevelInfo : MonoBehaviour
     {
+        public GameObject gameBlocks ;
         public GameObject blockOne ;
         public GameObject blockTwo;
         public GameObject blockThree;
