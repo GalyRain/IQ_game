@@ -7,7 +7,6 @@ namespace Game
         [SerializeField] private GameObject block;
         
         private UnityEngine.Camera _camera;
-        private HingeJoint2D _hingeJoint;
         private Vector3 _blockRotation;
         private Vector3 mousePositionA;
         private Vector3 mousePositionB;
@@ -25,8 +24,9 @@ namespace Game
         }
 
         private void OnMouseDown()
-        {
+        { 
             _blockRotation = block.transform.rotation.eulerAngles;
+           
             mousePositionA = _camera.ScreenToWorldPoint(Input.mousePosition);
         }
 

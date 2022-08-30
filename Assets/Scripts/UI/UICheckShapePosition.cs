@@ -639,10 +639,10 @@ namespace UI
                     IsPositionBlockRight = true;
                 }
             }
-            Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position));
-            Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position));
-            Debug.Log(Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position));
-            Debug.Log(Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position));
+            // Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockTwo.transform.position));
+            // Debug.Log(Vector3.Distance(levelInfo.blockOne.transform.position, levelInfo.blockThree.transform.position));
+            // Debug.Log(Vector3.Distance(levelInfo.blockThree.transform.position, levelInfo.blockFour.transform.position));
+            // Debug.Log(Vector3.Distance(levelInfo.blockFour.transform.position, levelInfo.blockFive.transform.position));
             return IsPositionBlockRight;
         }
     }
